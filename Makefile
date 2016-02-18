@@ -14,9 +14,7 @@ windows: prepare-windows build-windows
 
 # Only run the build (no dependency grabbing)
 build:
-	go build -o telegraf -ldflags \
-		"-X main.Version=$(VERSION)" \
-		./cmd/telegraf/telegraf.go
+	go install -ldflags "-X main.Version=$(VERSION)" ./...
 
 build-windows:
 	go build -o telegraf.exe -ldflags \
@@ -30,9 +28,7 @@ build-for-docker:
 
 # Build with race detector
 dev: prepare
-	go build -race -o telegraf -ldflags \
-		"-X main.Version=$(VERSION)" \
-		./cmd/telegraf/telegraf.go
+	go build -race -ldflags "-X main.Version=$(VERSION)" ./...
 
 # Build linux 64-bit, 32-bit and arm architectures
 build-linux-bins: prepare
